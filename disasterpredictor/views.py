@@ -9,12 +9,11 @@ from .forms import CustomUserCreationForm
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.conf import settings
-from google import genai
 import json
 import os
 from risks_perlocation import analyze_country, country_aliases, df
 from django.conf import settings
-import google.generativeai as genai
+
 
 
 
@@ -103,9 +102,6 @@ def custom_logout(request):
     messages.success(request, "✅ You have been logged out successfully.")
     return redirect("index")
 # Initialize Gemini client
-import sys
-from google import genai
-from google.genai import types
 
   # ✅ must include "models/"
 from risks_perlocation import analyze_country
@@ -214,6 +210,7 @@ Here is the data summary:
         "countries": countries,
         "country_aliases": country_aliases,
     })
+
 
 
 
