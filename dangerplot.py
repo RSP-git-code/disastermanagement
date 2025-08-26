@@ -4,11 +4,12 @@ import joblib
 import json
 import plotly.graph_objects as go
 import plotly.io as pio
+from pathlib import Path
 
 def generate_map():
     # ---- all your existing code (unchanged) ----
     df = pd.read_csv("Disaster_Zones.csv")
-    model = joblib.load("danger_zone_model.pkl")
+    model = joblib.load(BASE_DIR / "danger_zone_model.pkl")
 
     name_mapping = {
         "USA": "United States of America",
@@ -139,4 +140,5 @@ def generate_map():
     #  instead of fig.show()
     import plotly.io as pio
     return pio.to_html(fig, full_html=False, config={"responsive": True})
+
 
