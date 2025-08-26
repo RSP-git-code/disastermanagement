@@ -5,7 +5,8 @@ import json
 import plotly.graph_objects as go
 import plotly.io as pio
 from pathlib import Path
-from disasterpredictor import settings
+from django.conf import settings
+
 
 def generate_map():
     # ---- all your existing code (unchanged) ----
@@ -142,6 +143,7 @@ def generate_map():
     #  instead of fig.show()
     import plotly.io as pio
     return pio.to_html(fig, full_html=False, config={"responsive": True})
+
 
 
 
