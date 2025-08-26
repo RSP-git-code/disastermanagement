@@ -2,10 +2,11 @@ import pandas as pd
 import plotly.express as px
 import joblib
 from pathlib import Path
-BASE_DIR = Path(__file__).resolve().parent.parent
+from disasterpredictor import settings
 # Load dataset and model
 df = pd.read_csv("Disaster_Zones.csv")
-model = joblib.load(BASE_DIR / "danger_zone_model.pkl")
+model_path = Path(settings.BASE_DIR) / "danger_zone_model.pkl"
+model = joblib.load(model_path)
 
 
 # Aliases for common country names → always map to canonical
@@ -88,4 +89,5 @@ def analyze_country(country: str):
     )
 
     return summary, fig
+
 
