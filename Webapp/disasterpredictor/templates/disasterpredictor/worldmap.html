@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Map</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    #map-container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+    /* Loader styling */
+    #map-loading-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      text-align: center;
+      padding: 20px;
+    }
+    .spinner {
+      border: 6px solid rgba(255, 255, 255, 0.2);
+      border-top: 6px solid #ffeb3b;
+      border-radius: 50%;
+      width: 60px; height: 60px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+    .loading-text {
+      margin-top: 15px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ffeb3b;
+    }
+    #loading-funfact {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-top: 10px;
+      max-width: 600px;
+    }
+
+    /* Back button */
+    .back-home {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      z-index: 2000;
+    }
+    .back-home:hover {
+      background: #ffc107;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="map-loading-screen">
+  <div class="spinner"></div>
+  <p class="loading-text">🌍 Map is loading, please wait...</p>
+  <p id="loading-funfact" class="mt-3"></p>
+</div>
+
+<!-- Map Container -->
+<div id="map-container">
+  {{ chart|safe }}
+
+  <!-- Back button -->
+  <a href="{% url 'index' %}" class="back-home">⬅ Back to Home</a>
+</div>
+
+<script>
+  const funFacts = [
+    "🐾 Animal Incident — Human–wildlife conflict or livestock losses.",
+    "🦠 Epidemic — Rapid spread of infectious diseases.",
+    "🌊 Flood — Overflowing rivers or heavy rainfall inundating land.",
+    "🌋 Volcanic Eruption — Lava, ash and gases ejected violently.",
+    "🌪 Cyclone — Strong rotating winds with heavy rainfall.",
+    "🌍 Earthquake — Ground shaking due to tectonic plate movements.",
+    "🔥 Wildfire — Fast spreading fires consuming forests.",
+    "🌡 Heatwave — Prolonged extreme heat affecting people and crops.",
+    "❄ Cold Wave — Extreme cold spells causing frost and snow disasters.",
+    "🥵 Drought — Long dry periods causing water scarcity.",
+    "💨 Landslide — Rock and soil collapse due to rain or quakes.",
+    "🌐 Tsunami — Huge waves triggered by undersea quakes or eruptions.",
+    "💥 Industrial Accident — Explosions, chemical leaks, or man-made disasters."
+  ];
+
+  let loadIndex = 0;
+  function showLoadingFact() {
+    document.getElementById("loading-funfact").textContent = funFacts[loadIndex];
+    loadIndex = (loadIndex + 1) % funFacts.length;
+  }
+  setInterval(showLoadingFact, 2500);
+  showLoadingFact();
+
+  // Hide loader once Plotly chart is ready
+  document.addEventListener("DOMContentLoaded", function () {
+    const checkPlot = setInterval(() => {
+      const plot = document.querySelector("#map-container .js-plotly-plot");
+      if (plot) {
+        clearInterval(checkPlot);
+        document.getElementById("map-loading-screen").style.display = "none";
+      }
+    }, 500);
+  });
+</script>
+
+</body>
+</html>
+
