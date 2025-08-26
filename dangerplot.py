@@ -67,6 +67,7 @@ def generate_map():
 
     disasters = sorted(prediction_map["Disaster_Type"].unique())
     fig = go.Figure()
+    
 
     for i, d in enumerate(disasters):
         sub = prediction_map[prediction_map["Disaster_Type"] == d]
@@ -138,11 +139,18 @@ def generate_map():
         title="Categories")
     )
 
-    fig.update_geos(fitbounds="locations", visible=False)
+    fig.update_geos(fitbounds="locations", visible=False,
+    projection_type="natural earth",
+    showcountries=True,
+    showcoastlines=True,
+    lataxis_range=[-60, 85],  # Full world latitude
+    lonaxis_range=[-180, 180]) # Full world longitude)
+
 
     #  instead of fig.show()
     import plotly.io as pio
     return pio.to_html(fig, full_html=False, config={"responsive": True})
+
 
 
 
