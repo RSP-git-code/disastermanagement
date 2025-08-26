@@ -13,6 +13,10 @@ from google import genai
 import json
 import os
 from risks_perlocation import analyze_country, country_aliases, df
+from django.conf import settings
+import google.generativeai as genai
+
+
 
 def index(request):
     return render(request, "disasterpredictor/index.html")
@@ -116,8 +120,6 @@ from google.genai import types
 #     temperature=0.7, top_p=0.95, top_k=20,
 #     candidate_count=1, max_output_tokens=200
 # )
-from google import genai
-from google.genai import types
 from django.shortcuts import render
 from risks_perlocation import analyze_country, df, country_aliases
 from django.views.decorators.csrf import csrf_exempt
@@ -143,8 +145,7 @@ def build_country_analysis(country):
     chart_html = fig.to_html(full_html=False, include_plotlyjs=False)
 
     return table_html, chart_html, summary  # ✅ 3 values
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-client = genai.Client(api_key=GOOGLE_API_KEY)
+client = genai.Client(api_key=settings.GOOGLE_API_KEY))
 generation_config = types.GenerateContentConfig(
     temperature=0.7,
     top_p=0.95,
@@ -213,5 +214,6 @@ Here is the data summary:
         "countries": countries,
         "country_aliases": country_aliases,
     })
+
 
 
