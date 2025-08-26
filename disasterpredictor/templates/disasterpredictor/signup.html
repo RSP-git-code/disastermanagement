@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+
+<style>
+  body {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .signup-card {
+    width: 420px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
+    animation: fadeInUp 0.7s ease;
+  }
+  .signup-header {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+    color: white;
+    text-align: center;
+    padding: 25px;
+  }
+  .signup-header h2 {
+    margin: 0;
+    font-weight: bold;
+  }
+  @keyframes fadeInUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+</style>
+
+<div class="signup-card">
+  <div class="signup-header">
+    <h2> Create Account</h2>
+    <p class="mb-0">Join us to explore more</p>
+  </div>
+  <div class="p-4">
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="username" class="form-label"> Name</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your name" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label"> Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="password1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password1" name="password1" placeholder="At least 8 characters" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="password2" class="form-label"> Confirm Password</label>
+        <input type="password" class="form-control" id="password2" name="password2" placeholder="Re-enter password" required>
+      </div>
+
+      <button type="submit" class="btn btn-success w-100 py-2"> Sign Up</button>
+    </form>
+
+    <div class="text-center mt-3">
+      Already have an account? <a href="{% url 'login' %}">Login</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
