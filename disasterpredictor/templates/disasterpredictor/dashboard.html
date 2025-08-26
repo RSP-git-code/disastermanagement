@@ -1,0 +1,82 @@
+{% extends "base.html" %}.
+{% block body_class %}no-padding{% endblock %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+<style>
+.dashboard-hero {
+  background-image: url("https://images.unsplash.com/photo-1541845157-a6d2d100c931?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.dashboard-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0); /* slightly darker for clarity */
+}
+.dashboard-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  width: 100%;
+}
+.dashboard-card {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 20px;
+  padding: 30px;
+  color: #fff;
+  transition: transform 0.3s, background-color 0.3s;
+  cursor: pointer;
+}
+.dashboard-card:hover {
+  transform: translateY(-8px);
+  background-color: rgba(255, 193, 7, 0.85);
+  color: #000;
+}
+.dashboard-card h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.dashboard-card p {
+  font-size: 1.1rem;
+}
+</style>
+
+<div class="dashboard-hero">
+  <div class="dashboard-content container">
+    <h1 class="mb-5">🌍 Disaster Predictor Dashboard</h1>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <a href="{% url 'worldmap' %}" style="text-decoration:none;">
+          <div class="dashboard-card h-100">
+            <h3>🌐 World View</h3>
+            <p>Explore global disaster risk zones on an interactive map.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="{% url 'country' %}" style="text-decoration:none;">
+          <div class="dashboard-card h-100">
+            <h3>🏳 Country Analysis</h3>
+            <p>View the most common disasters per country with detailed charts.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
