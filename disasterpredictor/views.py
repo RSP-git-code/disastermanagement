@@ -145,7 +145,7 @@ def build_country_analysis(country):
     chart_html = fig.to_html(full_html=False, include_plotlyjs=False)
 
     return table_html, chart_html, summary  # ✅ 3 values
-client = genai.Client(api_key=settings.GOOGLE_API_KEY))
+client = genai.Client(api_key=settings.GOOGLE_API_KEY)
 generation_config = types.GenerateContentConfig(
     temperature=0.7,
     top_p=0.95,
@@ -214,6 +214,7 @@ Here is the data summary:
         "countries": countries,
         "country_aliases": country_aliases,
     })
+
 
 
 
