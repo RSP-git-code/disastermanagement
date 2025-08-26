@@ -11,6 +11,7 @@ from django.http import JsonResponse
 from django.conf import settings
 from google import genai
 import json
+import os
 from risks_perlocation import analyze_country, country_aliases, df
 
 def index(request):
@@ -212,4 +213,5 @@ Here is the data summary:
         "countries": countries,
         "country_aliases": country_aliases,
     })
+
 
