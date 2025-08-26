@@ -129,6 +129,11 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER") 
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD") # Gmail App Password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# -------------------
+# API Keys
+# -------------------
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+
 
 
 # -------------------
