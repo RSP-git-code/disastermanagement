@@ -132,7 +132,8 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # -------------------
 # API Keys
 # -------------------
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+GOOGLE_API_KEY =  "AIzaSyBOtHdfR-6bTo4_JoM4Ytc1j7bus8hyX0o"
+
 
 
 
@@ -155,4 +156,5 @@ STATIC_URL = "static/"
 # Default PK type
 # -------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 
