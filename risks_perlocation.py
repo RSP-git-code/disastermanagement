@@ -2,7 +2,8 @@ import pandas as pd
 import plotly.express as px
 import joblib
 from pathlib import Path
-from disasterpredictor import settings
+from django.conf import settings
+
 # Load dataset and model
 df = pd.read_csv("Disaster_Zones.csv")
 model_path = Path(settings.BASE_DIR) / "danger_zone_model.pkl"
@@ -89,5 +90,6 @@ def analyze_country(country: str):
     )
 
     return summary, fig
+
 
 
