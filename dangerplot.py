@@ -5,11 +5,12 @@ import json
 import plotly.graph_objects as go
 import plotly.io as pio
 from pathlib import Path
+from disasterpredictor import settings
 
 def generate_map():
     # ---- all your existing code (unchanged) ----
     df = pd.read_csv("Disaster_Zones.csv")
-    model_path = Path(settings.BASE_DIR) /
+    model_path = Path(settings.BASE_DIR) / "danger_zone_model.pkl"
     model = joblib.load(model_path)
 
     name_mapping = {
@@ -141,6 +142,7 @@ def generate_map():
     #  instead of fig.show()
     import plotly.io as pio
     return pio.to_html(fig, full_html=False, config={"responsive": True})
+
 
 
 
