@@ -57,7 +57,7 @@ ROOT_URLCONF = "Webapp.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "Webapp" / "templates"],
+        "DIRS": [BASE_DIR / "Webapp" / "templates", BASE_DIR / "disasterprediction" / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -156,6 +156,7 @@ STATIC_URL = "static/"
 # Default PK type
 # -------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 
 
 
