@@ -16,8 +16,6 @@ This project is developed as part of my **Engineering Clinics (Semester 5)** cou
 This is important to implement the Django :
 <img width="758" height="353" alt="image" src="https://github.com/user-attachments/assets/13e70eba-580a-444c-b803-5819126ef7f0" />
 
-
-
 ---
 
 ## Working of the website:
@@ -39,11 +37,10 @@ This is important to implement the Django :
    -  Explanation of the graph using gemini AI :
      <img width="1577" height="784" alt="image" src="https://github.com/user-attachments/assets/53c4474f-4f39-45e8-9fba-b26a98744a81" />
      <img width="1471" height="621" alt="image" src="https://github.com/user-attachments/assets/9c198280-7b7c-42de-91bb-94e9531d8053" />
-     
-
+     <img width="1443" height="256" alt="image" src="https://github.com/user-attachments/assets/35a7a6dd-00f5-4377-a623-d15f5475009b" />
 
      ## Global Risk prediction view via interactive world map:
-     
+   <img width="1919" height="836" alt="image" src="https://github.com/user-attachments/assets/30da344e-913a-4f0b-a94f-cd269f6fe5fb" />
 
 ---
 
@@ -54,16 +51,41 @@ This is important to implement the Django :
 - **Z-scores**: Floods (2.1 → Extreme Danger), Earthquakes (0.7 → Moderate), Cyclones (-0.3 → Low)  
 - **Risk Summary**: Floods are the highest-risk disaster for India.  
 ---
+---
 
-## 🛠️ Installation & Setup
+## ⚙️ Setup
 
-### 1. Clone the repository
-```bash
-git clone https://github.com/your-username/disaster-prediction.git
-cd disaster-prediction
+1. Create a virtual environment and activate it.  
+2. Install the required Python libraries using `pip install -r requirements.txt`.  
+3. Place the dataset file **`Disaster_Zones.csv`** in the project directory.  
+4. Place the trained model file **`danger_zone_model.pkl`** in the same directory.  
+5. Run database migrations with `python manage.py migrate`.  
+6. Start the Django development server using `python manage.py runserver` in command prompt.  
+7. Open the web application in your browser by the local link generated in the commandprompt.  
 
+---
 
-## 
+## Requirements
+
+- Python 3.9 or higher  
+- Django (web framework)  
+- Pandas (data processing)  
+- Plotly (visualizations)  
+- Scikit-learn (Multinomial Logistic Regression model)  
+- Joblib (model persistence/loading)  
+---
+---
+
+##  Sources
+
+- [EM-DAT: The International Disaster Database](https://www.emdat.be/) – Historical disaster occurrence data.  
+- [Kaggle Datasets](https://www.kaggle.com/) – Supplementary disaster datasets for training and validation.  
+- [Scikit-learn Documentation](https://scikit-learn.org/stable/) – Multinomial Logistic Regression and model utilities.  
+- [Django Documentation](https://docs.djangoproject.com/) – Web framework reference.  
+- [Plotly Documentation](https://plotly.com/python/) – Interactive data visualization.  
+- [Pandas Documentation](https://pandas.pydata.org/docs/) – Data analysis and preprocessing.  
+
+---
 
 
 
