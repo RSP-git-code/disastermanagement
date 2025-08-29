@@ -14,20 +14,8 @@ This project is developed as part of my **Engineering Clinics (Semester 5)** cou
 
 ## Project Structure:
 This is important to implement the Django :
-<img width="499" height="819" alt="image" src="https://github.com/user-attachments/assets/9da96b3b-c4e7-4274-8a86-cd68a502638c" />
+<img width="758" height="353" alt="image" src="https://github.com/user-attachments/assets/13e70eba-580a-444c-b803-5819126ef7f0" />
 
-
-├── Webapp/ # Django app
-│ ├── templates/ # HTML templates
-│ │ ├── base.html
-│ │ ├── country_analysis.html
-│ └── views.py # Handles requests and rendering
-│
-├── Disaster_Zones.csv # Disaster management dataset
-├── danger_zone_model.pkl # Trained Multinomial Logistic Regression model
-├── risksperlocation.py # Core prediction and visualization logic
-├── requirements.txt # Python dependencies
-└── README.md # Project documentation
 
 
 ---
