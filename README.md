@@ -73,7 +73,7 @@ This is important to implement the Django :
 - Plotly (visualizations)  
 - Scikit-learn (Multinomial Logistic Regression model)  
 - Joblib (model persistence/loading)  
----Gemini API key(for explaining predicted  graph and table in country analysis)
+-Gemini API key(for explaining predicted  graph and table in country analysis)
 ---
 
 ##  Sources
