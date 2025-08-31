@@ -67,13 +67,14 @@ This is important to implement the Django :
 
 ## Requirements
 
-- Python 3.9 or higher  
-- Django (web framework)  
-- Pandas (data processing)  
-- Plotly (visualizations)  
-- Scikit-learn (Multinomial Logistic Regression model)  
-- Joblib (model persistence/loading)  
--Gemini API key(for explaining predicted  graph and table in country analysis)
+- **Python** 3.9 or higher  
+- **Django** – Web framework for backend and UI  
+- **Pandas** – Data processing and analysis  
+- **Plotly** – Interactive visualizations  
+- **Scikit-learn** – Machine learning (Multinomial Logistic Regression model)  
+- **Joblib** – Model persistence/loading  
+- **Gemini API key** – For generating AI-based explanations of predicted graphs and tables in country analysis  
+
 ---
 
 ##  Sources
