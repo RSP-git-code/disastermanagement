@@ -15,13 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from disasterpredictor import views
 from django.contrib.auth import views as auth_views
 from disasterpredictor.views  import explain_graph
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("accounts/", include("allauth.urls")),  # Google login/signup
     path("", views.index, name="index"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path("worldmap/", views.worldmap, name="worldmap"),

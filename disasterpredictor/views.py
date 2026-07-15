@@ -185,22 +185,24 @@ Summarize only the key insights:
 - Which disaster types are most frequent  
 - What their general risk level is (Danger, Low, or Safe)  
 
-Keep it concise, simple, and easy to understand.  
+Keep it concise, simple, and easy to understand.
 Here is the data summary:
 {table_summary}
-{chart_html}
 """
 
-                response = client.models.generate_content(
-                    model=model_name,
-                    contents=[prompt],
-                    config=generation_config,
-                )
-
-                if response and response.candidates:
-                    explanation = response.candidates[0].content.parts[0].text
-                else:
-                    explanation = "[No valid response]"
+                try:
+                    response = client.models.generate_content(
+                        model=model_name,
+                        contents=[prompt],
+                        config=generation_config,
+                    )
+                    if response and response.candidates:
+                        explanation = response.candidates[0].content.parts[0].text
+                    else:
+                        explanation = "[No valid response from Gemini]"
+                except Exception as e:
+                    print(f"[explain_graph] Gemini call failed: {e!r}")
+                    explanation = f"⚠️ AI explanation unavailable right now ({e})"
 
     return render(request, "disasterpredictor/country.html", {
         "country": country,

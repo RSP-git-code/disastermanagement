@@ -39,6 +39,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
     "disasterpredictor",
 ]
 
@@ -50,7 +55,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
+
+SITE_ID = 1
 
 ROOT_URLCONF = "Webapp.urls"
 
@@ -91,7 +99,32 @@ AUTH_USER_MODEL = "disasterpredictor.CustomUser"
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",      # default
     "disasterpredictor.backends.EmailBackend",        # email login backend
+    "allauth.account.auth_backends.AuthenticationBackend",  # Google/social login
 ]
+
+# -------------------
+# django-allauth (Google login)
+# -------------------
+# CustomUser has no meaningful "username" field (email is the identifier),
+# so let allauth run on email alone.
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
+# Google already verifies the email; skip Django-side email verification,
+# since outgoing mail is unreliable on the Render free tier.
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APP": {
+            "client_id": os.environ.get("GOOGLE_OAUTH_CLIENT_ID", ""),
+            "secret": os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET", ""),
+            "key": "",
+        },
+        "SCOPE": ["profile", "email"],
+        "AUTH_PARAMS": {"access_type": "online"},
+    }
+}
 
 # Redirects after login/logout
 LOGIN_URL = "/login/"
@@ -132,7 +165,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # -------------------
 # API Keys
 # -------------------
-GOOGLE_API_KEY =  "AIzaSyBOtHdfR-6bTo4_JoM4Ytc1j7bus8hyX0o"
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY", "")
 
 
 
