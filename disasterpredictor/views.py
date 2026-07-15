@@ -107,27 +107,26 @@ def custom_logout(request):
 from risks_perlocation import analyze_country
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from google import genai
-from google.genai import types
-# Gemini setup
-# GOOGLE_API_KEY =
-# client = genai.Client(api_key=GOOGLE_API_KEY, http_options=types.HttpOptions(api_version="v1alpha"))
-# generation_config = types.GenerateContentConfig(
-#     temperature=0.7, top_p=0.95, top_k=20,
-#     candidate_count=1, max_output_tokens=200
-# )
 from django.shortcuts import render
 from risks_perlocation import analyze_country, df, country_aliases
 from django.views.decorators.csrf import csrf_exempt
 
-generation_config = types.GenerateContentConfig(
-    temperature=0.7,
-    top_p=0.95,
-    top_k=20,
-    candidate_count=1,
-    max_output_tokens=200
-)
 model_name = "models/gemini-2.0-flash-001"
+_gemini_client = None
+
+def _get_gemini_client():
+    """Import google-genai and build the client lazily, on first use.
+
+    Importing google.genai pulls in a large chain of submodules; doing that
+    at module load time slows Django startup enough to trip gunicorn's
+    worker boot timeout on cold starts.
+    """
+    global _gemini_client
+    if _gemini_client is None:
+        from google import genai
+        _gemini_client = genai.Client(api_key=settings.GOOGLE_API_KEY)
+    return _gemini_client
+
 def build_country_analysis(country):
     """
     Runs analyze_country() and prepares HTML for table + chart.
@@ -141,15 +140,6 @@ def build_country_analysis(country):
     chart_html = fig.to_html(full_html=False, include_plotlyjs=False)
 
     return table_html, chart_html, summary  # ✅ 3 values
-client = genai.Client(api_key=settings.GOOGLE_API_KEY)
-generation_config = types.GenerateContentConfig(
-    temperature=0.7,
-    top_p=0.95,
-    top_k=20,
-    candidate_count=1,
-    max_output_tokens=200
-)
-model_name = "models/gemini-2.0-flash-001"
 
 @csrf_exempt
 def explain_graph(request):
@@ -191,7 +181,15 @@ Here is the data summary:
 """
 
                 try:
-                    response = client.models.generate_content(
+                    from google.genai import types
+                    generation_config = types.GenerateContentConfig(
+                        temperature=0.7,
+                        top_p=0.95,
+                        top_k=20,
+                        candidate_count=1,
+                        max_output_tokens=200,
+                    )
+                    response = _get_gemini_client().models.generate_content(
                         model=model_name,
                         contents=[prompt],
                         config=generation_config,
