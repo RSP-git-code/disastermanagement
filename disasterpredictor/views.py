@@ -187,8 +187,8 @@ Here is the data summary:
                         top_p=0.95,
                         top_k=20,
                         candidate_count=1,
-                        max_output_tokens=512,
-                        thinking_config=types.ThinkingConfig(thinking_budget=0),
+                        max_output_tokens=1024
+                        
                     )
                     response = _get_gemini_client().models.generate_content(
                         model=model_name,
