@@ -111,7 +111,7 @@ from django.shortcuts import render
 from risks_perlocation import analyze_country, df, country_aliases
 from django.views.decorators.csrf import csrf_exempt
 
-model_name = "models/gemini-2.0-flash-001"
+model_name = "models/gemini-3.6-flash"
 _gemini_client = None
 
 def _get_gemini_client():
