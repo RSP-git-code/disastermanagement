@@ -187,16 +187,19 @@ Here is the data summary:
                         top_p=0.95,
                         top_k=20,
                         candidate_count=1,
-                        max_output_tokens=200,
+                        max_output_tokens=512,
+                        thinking_config=types.ThinkingConfig(thinking_budget=0),
                     )
                     response = _get_gemini_client().models.generate_content(
                         model=model_name,
                         contents=[prompt],
                         config=generation_config,
                     )
-                    if response and response.candidates:
+                    if response and response.candidates and response.candidates[0].content.parts:
                         explanation = response.candidates[0].content.parts[0].text
                     else:
+                        finish_reason = response.candidates[0].finish_reason if response and response.candidates else None
+                        print(f"[explain_graph] Empty Gemini response, finish_reason={finish_reason!r}")
                         explanation = "[No valid response from Gemini]"
                 except Exception as e:
                     print(f"[explain_graph] Gemini call failed: {e!r}")
